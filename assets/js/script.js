@@ -14,9 +14,9 @@ $(function () {
     $(saveBtn).on('click', function () {
       console.log('test');
       let hour = $(this).parent().attr('id');
-      let content = $(this).sibling('.description').val();
+      let content = $(this).siblings('.description').val();
   
-      localStorage.setItem(hour.value, content.value);
+      localStorage.setItem(hour, content);
     });
   
   
