@@ -2,15 +2,15 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  
+
   let saveBtn = $('.saveBtn');
-    $(saveBtn).on('click', function () {
-      console.log('test');
-      let hour = $(this).parent().attr('id');
-      let content = $(this).siblings('.description').val();
-  
-      localStorage.setItem(hour, content);
-    });
+  $(saveBtn).on('click', function () {
+    console.log('test');
+    let hour = $(this).parent().attr('id');
+    let content = $(this).siblings('.description').val();
+
+    localStorage.setItem(hour, content);
+  });
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
@@ -22,33 +22,33 @@ $(function () {
 
   let currentHour = dayjs().get('hour');
   let timeBlock = $('.time-block');
-  $(timeBlock).each(function() {
-    let setTime = $(this).attr('id');
+  $(timeBlock).each(function () {
+    let setTime = parseInt($(this).attr('id'));
 
-    if (currentHour === setTime) {
-      $(this).addClass('present');
-      console.log(setTime);
-      console.log(currentHour);
+    if (currentHour > setTime) {
+      $(this).addClass('past');
+      console.log(setTime, typeof setTime);
+      console.log(currentHour, typeof currentHour);
     }
 
-    else if (currentHour < setTime) {
+    else if (currentHour == setTime) {
+      $(this).removeClass('past');
+      $(this).addClass('present');
+      console.log(setTime, typeof setTime);
+      console.log(currentHour, typeof currentHour);
+    }
+
+    else {
+      $(this).removeClass('past');
       $(this).removeClass('present');
       $(this).addClass('future');
-      console.log(setTime);
-      console.log(currentHour);
-    }
-
-    else if (currentHour > setTime) {
-      $(this).removeClass('present');
-      $(this).addClass('past');
-      console.log(setTime);
-      console.log(currentHour);
+      console.log(setTime, typeof setTime);
+      console.log(currentHour, typeof currentHour);
     }
   })
 
-  
-  
-  
+
+
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
